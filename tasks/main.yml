@@ -1,0 +1,36 @@
+# Copyright (c) 2023, Bennett Samowich <bennett@foolean.org>
+# All rights reserved
+# SPDX short identifier: BSD-3-Clause
+---
+
+# We put the entire role in a block so we can create
+# a role specific tag, which saves the caller from
+# having to do so in their playbook.
+- name: Role foolean/screen
+  block:
+
+    - name: Set OS variables
+      ansible.builtin.include_vars:
+        file: "{{ item }}"
+      with_first_found:
+        - "{{ ansible_os_family|lower }}.yml"
+        - "default.yml"
+
+    - name: Install screen
+      become: true
+      ansible.builtin.package:
+        name:
+          - 'screen'
+
+    - name: Ensure /var/run/screen exists
+      become: true
+      ansible.builtin.file:
+        name: '/var/run/screen'
+        state: directory
+        owner: 'root'
+        group: "{{ screen_group }}"
+        mode: '1777'
+
+  # Tags to be applied to this role (block)
+  tags:
+    - 'role_foolean_screen'

@@ -1,0 +1,8 @@
+# Copyright (c) 2023, Bennett Samowich <bennett@foolean.org>
+# All rights reserved
+# SPDX short identifier: BSD-3-Clause
+---
+
+# screen_group
+#   Name of the group that screen uses
+screen_group: 'screen'
