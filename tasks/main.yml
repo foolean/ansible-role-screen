@@ -29,7 +29,7 @@
         state: directory
         owner: 'root'
         group: "{{ screen_group }}"
-        mode: '1777'
+        mode: '1775'
 
   # Tags to be applied to this role (block)
   tags:
